@@ -6,12 +6,11 @@ namespace Sudoku.LevelControls
 {
     public partial class TopTenResultForm : UserControl
     {
-        private List<string[]> dataFromDB;
+        private DBTopTenResult dbData = new DBTopTenResult();
         public TopTenResultForm()
         {
             InitializeComponent();
-            dataFromDB = DBTopTenResult.LoadDataFromDB("easy");
-            FillingDataGridView(dataFromDB);
+            FillingDataGridView(dbData.LoadDataFromDB("easy"));
         }
 
         private void FillingDataGridView(List<string[]> listWithData)

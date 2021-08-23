@@ -8,10 +8,10 @@ using System.Data.SQLite;
 
 namespace Sudoku
 {
-    static class DBTopTenResult 
+    class DBTopTenResult 
     {
         private static SQLiteConnection connectionDB = new SQLiteConnection("Data Source=TopTenResultDB.db");
-        public static void OpenDb(string name, int time, string level)
+        public void OpenDb(string name, int time, string level)
         {
             connectionDB.Open();
             string sql = $"insert into Result{level}Level (PlayerName, BestTime) values ('{name}', '{GetTimeFromSecund(time)}')";
@@ -19,14 +19,14 @@ namespace Sudoku
             command.ExecuteNonQuery();
             connectionDB.Close();
         }
-        private static string GetTimeFromSecund(int time)
+        private string GetTimeFromSecund(int time)
         {
             int minut = (time < 60) ? 0 : time / 60;
             double second = (minut < 1) ? time : (time - 60 * minut);
             return second< 10 ? $"{minut}:0{second}" : $"{minut}:{second}";
         }
 
-        public static List<string[]> LoadDataFromDB(string level)
+        public List<string[]> LoadDataFromDB(string level)
         {
             connectionDB.Open();
             string query = $"SELECT * FROM Result{level}Level ORDER BY BestTime";

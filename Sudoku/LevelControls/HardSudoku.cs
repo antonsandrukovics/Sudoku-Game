@@ -10,6 +10,8 @@ namespace Sudoku.LevelControls
     {
         private int[] arrSudoku;
         private int m, s;
+        private SudokuFunctionality sudokuFunctionality = new SudokuFunctionality();
+        private DBTopTenResult dbData = new DBTopTenResult();
         public HardSudoku()
         {
             InitializeComponent();
@@ -53,8 +55,8 @@ namespace Sudoku.LevelControls
                             }
                     }
                 }
-                arrSudoku = SudokuFunctionality.CreateFullSudokuTable();
-                SudokuFunctionality.SudokuOutPut(arrSudoku, Controls.OfType<TextBox>().ToArray(), indexLevel); 
+                arrSudoku = sudokuFunctionality.CreateFullSudokuTable();
+                sudokuFunctionality.SudokuOutPut(arrSudoku, Controls.OfType<TextBox>().ToArray(), indexLevel); 
             }
             else
             {
@@ -65,11 +67,11 @@ namespace Sudoku.LevelControls
         {
             if (timer1.Enabled == true)
             {
-                if (SudokuFunctionality.CheckFunction(Controls.OfType<TextBox>().ToArray(), arrSudoku, timer1))
+                if (sudokuFunctionality.CheckFunction(Controls.OfType<TextBox>().ToArray(), arrSudoku, timer1))
                 {
                     string s = getCheckedItemFromCheckedListBox();
                     int time = Convert.ToInt32(label9.Text) * 60 + Convert.ToInt32(label11.Text);
-                    DBTopTenResult.OpenDb(SudokuPlayForm.playerName, time, s);
+                    dbData.OpenDb(SudokuPlayForm.playerName, time, s);
                     MessageBox.Show("Good!");
                 }                
             }

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    static class SudokuFunctionality
+    class SudokuFunctionality
     {
-        public static int[] CreateFullSudokuTable()
+        public int[] CreateFullSudokuTable()
         {
             List<int> numbers = new List<int>() { 1,2,3,4,5,6,7,8,9};
             int[][] sudokuArr = new int[9][];
@@ -44,7 +44,7 @@ namespace Sudoku
             }
             return ConvertJaggedArrToSimpleArr(sudokuArr);
         }
-        public static void SudokuOutPut(int[] sudokuArr, TextBox[] textBoxs, int indexLevel)
+        public void SudokuOutPut(int[] sudokuArr, TextBox[] textBoxs, int indexLevel)
         {
             int coutn = 0;
             int[] numberTo = { 0, 3, 7, 8, 12, 15 };
@@ -69,7 +69,7 @@ namespace Sudoku
                 }
             }
         }
-        public static bool CheckFunction(TextBox[] textBoxs, int[] sudokuArr, Timer timer1)
+        public bool CheckFunction(TextBox[] textBoxs, int[] sudokuArr, Timer timer1)
         {
             bool result = false;
             int corrent = 0;
@@ -92,7 +92,7 @@ namespace Sudoku
             }
             return result;
         }
-        private static void ConvertColumnToRow(ref int[][] arr)
+        private void ConvertColumnToRow(ref int[][] arr)
         {
             int[][] newArr = new int[9][];
             for (int i = 0; i < 9; i++) { newArr[i] = new int[9]; }
@@ -105,7 +105,7 @@ namespace Sudoku
             }
             arr = newArr;
         }
-        private static void PermutationRow(ref int[][] arr)
+        private void PermutationRow(ref int[][] arr)
         {
             int[] temp;
 
@@ -116,7 +116,7 @@ namespace Sudoku
                 arr[i + 2] = temp;
             }
         }
-        private static void PermutationColon(ref int[][] arr)
+        private void PermutationColon(ref int[][] arr)
         {
             for (int i = 0; i < 9; i += 3)
             {
@@ -135,7 +135,7 @@ namespace Sudoku
                 }
             }
         }
-        private static int[] ConvertJaggedArrToSimpleArr(int[][] arr)
+        private int[] ConvertJaggedArrToSimpleArr(int[][] arr)
         {
             int[] simpleArr = new int[arr.Length * arr.Length];
             for (int i = 0, x = 0; i < arr.Length; i++)
